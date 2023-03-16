@@ -17,9 +17,9 @@
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="81.0" stylesheets="@java.css" text="Register here" />
             <Separator layoutX="14.0" layoutY="52.0" prefHeight="4.0" prefWidth="277.0" />
-            <JFXTextField layoutX="14.0" layoutY="73.0" prefHeight="27.0" prefWidth="128.0" promptText="First Name" />
-            <JFXTextField layoutX="160.0" layoutY="73.0" prefHeight="27.0" prefWidth="128.0" promptText="First Name" />
-            <JFXTextField layoutX="14.0" layoutY="113.0" prefHeight="27.0" prefWidth="277.0" promptText="Enter Email here" />
+            <JFXTextField fx:id="txtFirstName" layoutX="14.0" layoutY="73.0" prefHeight="27.0" prefWidth="128.0" promptText="First Name" />
+            <JFXTextField fx:id="txtLastName" layoutX="160.0" layoutY="73.0" prefHeight="27.0" prefWidth="128.0" promptText="Last Name" />
+            <JFXTextField fx:id="txtEmail" layoutX="14.0" layoutY="113.0" prefHeight="27.0" prefWidth="277.0" promptText="Enter Email here" />
             <JFXTextField fx:id="txtPassword" layoutX="12.0" layoutY="154.0" prefHeight="30.0" prefWidth="277.0" promptText="Password here" unFocusColor="BLACK" />
             <JFXRadioButton fx:id="rBtnDoctor" layoutX="71.0" layoutY="222.0" selected="true" text="Doctor">
                <toggleGroup>
