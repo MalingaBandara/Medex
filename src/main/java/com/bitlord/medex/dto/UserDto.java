@@ -14,16 +14,7 @@ public class UserDto {
 
     private AccountType accountType;
 
-    public UserDto() {
-    }
 
-    public UserDto(String firstName, String lastName, String email, String password, AccountType accountType) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.accountType = accountType;
-    }
 
 
     public String getFirstName() {
