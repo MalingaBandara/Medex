@@ -1,3 +1,7 @@
 * {
     -fx-font-family: 'Arial'
 }
+.root {
+    -fx-font-family: "Arial";
+}
+
