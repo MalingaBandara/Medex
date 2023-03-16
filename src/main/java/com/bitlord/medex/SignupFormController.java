@@ -28,31 +28,7 @@ public class SignupFormController {
 
     public void createAnAccountOnAction(ActionEvent actionEvent)  {
 
-        String email = txtEmail.getText().trim().toLowerCase();
-        /*for(UserDto dto:Database.userTable){
-            if(dto.getEmail().equals(email.trim().toLowerCase())){
-                new Alert(Alert.AlertType.WARNING,
-                        "email is already exist!s").show();
-                return;
-            }
-        }*/
-        Optional<UserDto> selectedUser = Database.userTable.stream()
-                .filter(e -> e.getEmail().equals(email))
-                .findFirst();
-        if (selectedUser.isPresent()){
-            new Alert(Alert.AlertType.WARNING,
-                    "email is already exists!").show();
-            return;
-        }
-        Database.userTable.add(
-                new UserDto(txtFirstName.getText(),
-                        txtLastName.getText(),
-                        email,
-                        txtPassword.getText(),
-                        rBtnDoctor.isSelected()? AccountType.DOCTOR:AccountType.PATIENT)
-        );
-        new Alert(Alert.AlertType.CONFIRMATION,
-                "Welcome!").show();
+
 
     }
 
