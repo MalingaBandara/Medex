@@ -62,9 +62,8 @@ public class LoginFormController {
 
                  }
 
-                 new Alert( Alert.AlertType.WARNING, String.format("We can't find an email %s", email) ).show();   // the email not available
-
              }
+        new Alert( Alert.AlertType.WARNING, String.format("We can't find an email %s", email) ).show();   // the email not available
     }
 
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
