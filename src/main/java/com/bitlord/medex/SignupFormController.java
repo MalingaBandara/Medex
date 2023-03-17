@@ -26,7 +26,7 @@ public class SignupFormController {
     public JFXTextField txtEmail;
 
 
-    public void createAnAccountOnAction(ActionEvent actionEvent)  {
+    public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
 
             // assign user input values
             String email = txtEmail.getText().trim().toLowerCase();
@@ -66,17 +66,24 @@ public class SignupFormController {
                         // show an alert to confirm  user registration
                         new Alert( Alert.AlertType.CONFIRMATION, "Wellcome!" ).show();
 
+                // after user get registered redirect Login form
+                setUi();
+
     }
 
 
     // already have account return to Login Form
     public void signinOnAction(ActionEvent actionEvent) throws IOException {
+        setUi();
+    }
 
+
+    // method for redirect Login form
+    private void setUi() throws IOException {
 
         Stage stage = (Stage) signupContext.getScene().getWindow();
 
         stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/LoginForm.fxml"))));
-
 
     }
 
