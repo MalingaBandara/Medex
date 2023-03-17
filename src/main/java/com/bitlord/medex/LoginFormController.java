@@ -66,6 +66,7 @@ public class LoginFormController {
         new Alert( Alert.AlertType.WARNING, String.format("We can't find an email %s", email) ).show();   // the email not available
     }
 
+    // Signup Form Load
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
 
         Stage stage = (Stage) logingContext.getScene().getWindow();
