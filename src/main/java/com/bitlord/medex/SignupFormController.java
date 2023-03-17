@@ -29,7 +29,7 @@ public class SignupFormController {
     public void createAnAccountOnAction(ActionEvent actionEvent)  {
 
             // assign user input values
-            String email = txtEmail.getText();
+            String email = txtEmail.getText().trim().toLowerCase();
 
                /* for ( UserDto dto : Database.userTable) {
 
@@ -43,19 +43,28 @@ public class SignupFormController {
 
                 // check user's email already exists  // (stream Like using for loop to search element)
                 Optional<UserDto> SelectedUser = Database.userTable.stream() // stream like a බටයක්, so when passing data thrw බටයකින් we can filter things
-                        .filter(e -> e.getEmail().equals(email.trim().toLowerCase()))
+                        .filter( e -> e.getEmail().equals( email ) )
                         .findFirst();
 
-                     // Selected user email already exists in database what to do next
-                        if (SelectedUser.isPresent() ) {
-                            new Alert( Alert.AlertType.WARNING,  "Email is Already exists!" ).show();
-                            return;
-                        }
+             // Selected user email already exists in database what to do next
+                if (SelectedUser.isPresent() ) {
+                    new Alert( Alert.AlertType.WARNING,  "Email is Already exists!" ).show();
+                    return;
+                }
 
 
+                // account creation
+                Database.userTable.add(
+                        new UserDto(
+                                txtFirstName.getText(),
+                                txtLastName.getText(),
+                                email, txtPassword.getText(),
+                                rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT
+                        )
+                );
 
-        // account creation
-
+                        // show an alert to confirm  user registration
+                        new Alert( Alert.AlertType.CONFIRMATION, "Wellcome!" ).show();
 
     }
 
