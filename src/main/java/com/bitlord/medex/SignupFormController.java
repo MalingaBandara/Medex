@@ -28,6 +28,20 @@ public class SignupFormController {
 
     public void createAnAccountOnAction(ActionEvent actionEvent)  {
 
+            // assign user input values
+            String email = txtEmail.getText();
+
+                for ( UserDto dto : Database.userTable) {
+
+                    if ( dto.getEmail().equals( email.trim().toLowerCase() ) ) {
+
+                        new Alert( Alert.AlertType.WARNING,  "Email is Already exists!" ).show();
+                        return;
+                    }
+
+                }
+
+         // account creation
 
 
     }
