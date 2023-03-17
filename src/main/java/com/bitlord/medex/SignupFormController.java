@@ -31,7 +31,7 @@ public class SignupFormController {
             // assign user input values
             String email = txtEmail.getText();
 
-                for ( UserDto dto : Database.userTable) {
+               /* for ( UserDto dto : Database.userTable) {
 
                     if ( dto.getEmail().equals( email.trim().toLowerCase() ) ) {
 
@@ -39,9 +39,22 @@ public class SignupFormController {
                         return;
                     }
 
-                }
+                }*/
 
-         // account creation
+                // check user's email already exists  // (stream Like using for loop to search element)
+                Optional<UserDto> SelectedUser = Database.userTable.stream() // stream like a බටයක්, so when passing data thrw බටයකින් we can filter things
+                        .filter(e -> e.getEmail().equals(email.trim().toLowerCase()))
+                        .findFirst();
+
+                     // Selected user email already exists in database what to do next
+                        if (SelectedUser.isPresent() ) {
+                            new Alert( Alert.AlertType.WARNING,  "Email is Already exists!" ).show();
+                            return;
+                        }
+
+
+
+        // account creation
 
 
     }
