@@ -4,13 +4,15 @@ import com.bitlord.medex.enums.GenderType;
 
 public class DoctorDto {
 
-    String firstName;
-    String lastName;
-    String nic;
-    String contact;
-    String email;
-    String specializations;
-    String Address;
+    private String firstName;
+    private String lastName;
+    private String nic;
+    private String contact;
+    private String email;
+    private String specializations;
+    private String Address;
+    private GenderType gender;
+
 
     public String getFirstName() {
         return firstName;
@@ -75,11 +77,4 @@ public class DoctorDto {
     public void setGender(GenderType gender) {
         this.gender = gender;
     }
-
-    GenderType gender;
-
-
-
-
-
 }
