@@ -1,5 +1,7 @@
 package com.bitlord.medex;
 
+import com.bitlord.medex.db.Database;
+import com.bitlord.medex.dto.DoctorDto;
 import com.bitlord.medex.util.Cookie;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -16,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 
 public class DoctorDashbordFormController {
 
@@ -29,7 +32,7 @@ public class DoctorDashbordFormController {
         initializeData();
     }
 
-    private void initializeData() {
+    private void initializeData() throws IOException {
 
         /*Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "yyyy-MM-dd" );
@@ -52,6 +55,26 @@ public class DoctorDashbordFormController {
         timeline.setCycleCount( Animation.INDEFINITE );
         timeline.play(); // start timeline
 
+        //---------------
+        // Check doctor account (to be implemented)
+        checkDoctorData();
+
+
+
+    }
+
+    // Check doctor account (to be implemented)
+    private void checkDoctorData() throws IOException {
+
+        Optional<DoctorDto> selectedDoctor = Database.doctorTable.stream()
+                .filter(e -> e.getEmail().equals("malinga@gmail.com"))
+                .findFirst();
+
+        if ( ! selectedDoctor.isPresent() ) {
+            // open a new window -->
+            setUi( "DoctorRegistrationForm" );
+
+        }
     }
 
 
@@ -61,10 +84,17 @@ public class DoctorDashbordFormController {
         if ( null == Cookie.selectedUser ) { // when user not get
 
             // redirect to Log in form
-            Stage stage = (Stage) doctorDashboardContext.getScene().getWindow();
-            stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/LoginForm.fxml"))));
+            setUi( "LoginForm" );
 
         }
+
+    }
+
+    // redirect to form
+    private void setUi (String location) throws IOException {
+
+        Stage stage = (Stage) doctorDashboardContext.getScene().getWindow();
+        stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/"+ location +".fxml"))));
 
     }
 
