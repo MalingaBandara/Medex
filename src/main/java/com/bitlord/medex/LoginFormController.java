@@ -51,8 +51,7 @@ public class LoginFormController {
                                         // log in
                                         Cookie.selectedUser = dto;  // set cookie
 
-                                                 Stage stage = (Stage) logingContext.getScene().getWindow();
-                                                 stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/DoctorDashbordForm.fxml"))));
+                                                 setUI( "DoctorDashbordForm" );
 
                              return;
 
@@ -76,10 +75,19 @@ public class LoginFormController {
     // Signup Form Load
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
 
-        Stage stage = (Stage) logingContext.getScene().getWindow();
-
-        stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/SignupForm.fxml"))));
-
+        setUI( "SignupForm" );
 
     }
+
+
+    // method for redirect forms
+    private void setUI ( String location ) throws IOException {
+
+        Stage stage = (Stage) logingContext.getScene().getWindow();
+
+        stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/"+ location +".fxml"))));
+
+    }
+
+
 }
