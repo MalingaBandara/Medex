@@ -20,7 +20,7 @@
             <JFXTextField fx:id="txtFirstName" labelFloat="true" layoutX="14.0" layoutY="76.0" prefHeight="27.0" prefWidth="128.0" promptText="First Name" />
             <JFXTextField fx:id="txtLastName" labelFloat="true" layoutX="160.0" layoutY="76.0" prefHeight="27.0" prefWidth="128.0" promptText="Last Name" />
             <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="14.0" layoutY="123.0" prefHeight="27.0" prefWidth="277.0" promptText="Enter Email here" />
-            <JFXTextField fx:id="txtPassword" labelFloat="true" layoutX="12.0" layoutY="167.0" prefHeight="30.0" prefWidth="277.0" promptText="Password here" unFocusColor="BLACK" />
+            <JFXTextField fx:id="txtPassword" labelFloat="true" layoutX="12.0" layoutY="172.0" prefHeight="30.0" prefWidth="277.0" promptText="Password here" unFocusColor="BLACK" />
             <JFXRadioButton fx:id="rBtnDoctor" layoutX="71.0" layoutY="222.0" selected="true" text="Doctor">
                <toggleGroup>
                   <ToggleGroup fx:id="accountType" />

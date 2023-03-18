@@ -3,6 +3,7 @@ package com.bitlord.medex;
 import com.bitlord.medex.db.Database;
 import com.bitlord.medex.dto.UserDto;
 import com.bitlord.medex.enums.AccountType;
+import com.bitlord.medex.util.Cookie;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -23,8 +24,7 @@ public class LoginFormController {
     public ToggleGroup accountType;
     public AnchorPane logingContext;
 
-    public void signinOnAction(ActionEvent actionEvent) {
-
+    public void signinOnAction(ActionEvent actionEvent) throws IOException {
 
         // get userName and password
         String email = txtEmail.getText();
@@ -47,6 +47,13 @@ public class LoginFormController {
 
                              // complete
                              new Alert( Alert.AlertType.CONFIRMATION, "Success!").show();
+
+                                        // log in
+                                        Cookie.selectedUser = dto;  // set cookie
+
+                                                 Stage stage = (Stage) logingContext.getScene().getWindow();
+                                                 stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/DoctorDashbordForm.fxml"))));
+
                              return;
 
                          }else {
