@@ -27,8 +27,9 @@ public class DoctorDto {
         }
 
         // no args Constructor
-    public DoctorDto() {
-    }
+        public DoctorDto() {
+        }
+
 
     // setters and getters - Enscap
     public String getFirstName() {
