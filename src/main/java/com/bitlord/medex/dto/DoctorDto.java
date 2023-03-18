@@ -13,7 +13,24 @@ public class DoctorDto {
     private String Address;
     private GenderType gender;
 
+    // Constructor
+        // full args Constructor
+        public DoctorDto(String firstName, String lastName, String nic, String contact, String email, String specializations, String address, GenderType gender) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.nic = nic;
+            this.contact = contact;
+            this.email = email;
+            this.specializations = specializations;
+            Address = address;
+            this.gender = gender;
+        }
 
+        // no args Constructor
+    public DoctorDto() {
+    }
+
+    // setters and getters - Enscap
     public String getFirstName() {
         return firstName;
     }
