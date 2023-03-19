@@ -26,7 +26,7 @@ public class Database {
 
             //---------------
 
-                doctorTable.add( new DoctorDto(
+                /*doctorTable.add( new DoctorDto(
                                                 "Malinga",
                                                 "Bandara",
                                                 "23453",
@@ -35,7 +35,7 @@ public class Database {
                                                 "Sample",
                                                 "Colombo",
                                                 GenderType.MALE
-                                ) ) ;
+                                ) ) ;*/
 
             //---------------
 

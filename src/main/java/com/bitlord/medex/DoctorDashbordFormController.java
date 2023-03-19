@@ -71,8 +71,12 @@ public class DoctorDashbordFormController {
                 .findFirst();
 
         if ( ! selectedDoctor.isPresent() ) {
-            // open a new window -->
-            setUi( "DoctorRegistrationForm" );
+
+            // open Doctor Registration Form window -->
+            Stage stage = new Stage();
+            stage.setScene( new Scene( FXMLLoader.load( getClass().getResource( "/com/bitlord/medex/DoctorRegistrationForm.fxml" ) ) ) );
+            stage.centerOnScreen();
+            stage.show();
 
         }
     }
