@@ -26,6 +26,6 @@
       </JFXRadioButton>
       <JFXRadioButton layoutX="337.0" layoutY="201.0" style="-fx-font-weight: bold;" text="FeMale" toggleGroup="$gender" />
       <JFXTextField fx:id="txtSpecializations" labelFloat="true" layoutX="41.0" layoutY="189.0" prefHeight="31.0" prefWidth="187.0" promptText="Specializations" style="-fx-font-weight: bold;" />
-      <JFXButton buttonType="RAISED" layoutX="474.0" layoutY="418.0" onAction="#submitDataOnAtion" prefHeight="41.0" prefWidth="166.0" style="-fx-background-color: #0D99FF; -fx-font-weight: bold;" text="Submit Data" textFill="WHITE" />
+      <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="474.0" layoutY="418.0" onAction="#submitDataOnAtion" prefHeight="41.0" prefWidth="166.0" style="-fx-background-color: #0D99FF; -fx-font-weight: bold;" text="Submit Data" textFill="WHITE" />
    </children>
 </AnchorPane>

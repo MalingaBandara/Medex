@@ -5,10 +5,12 @@ import com.bitlord.medex.dto.DoctorDto;
 import com.bitlord.medex.dto.UserDto;
 import com.bitlord.medex.enums.GenderType;
 import com.bitlord.medex.util.Cookie;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -24,11 +26,32 @@ public class DoctorRegistrationFormController {
     public ToggleGroup gender;
     public JFXTextField txtSpecializations;
     public AnchorPane doctorRegistrationContext;
+    public JFXButton btnSubmit;
 
 
     public void initialize() {
         // load user data
         loadUserData();
+
+
+        // ----------------- NIC Field Validate
+        txtNic.textProperty().addListener( ((observableValue, oldValue, newValue) -> {
+
+            // NIC conflict check
+            if ( Database.doctorTable.stream().filter( e->  e.getNic().equals( newValue )  ).findFirst().isPresent() ) {
+
+                new Alert( Alert.AlertType.WARNING, "NIC Conflict" ).show();
+
+                // disable submit button
+                btnSubmit.setDisable( true );
+                return;
+            }
+            btnSubmit.setDisable( false );
+
+        } ) );
+        // -----------------
+
+
     }
 
     private void loadUserData() {
