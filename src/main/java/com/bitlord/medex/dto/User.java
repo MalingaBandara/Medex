@@ -2,7 +2,7 @@ package com.bitlord.medex.dto;
 
 import com.bitlord.medex.enums.AccountType;
 
-public class UserDto {
+public class User {
 
     private String firstName;
 
@@ -18,11 +18,11 @@ public class UserDto {
     // Constructors
 
         // Default Constructor
-        public UserDto() {
+        public User() {
         }
 
         // Constructor using fields
-        public UserDto(String firstName, String lastName, String email, String password, AccountType accountType) {
+        public User(String firstName, String lastName, String email, String password, AccountType accountType) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
