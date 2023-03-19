@@ -75,6 +75,7 @@ public class PatientManagementFormController {
             }
         }
         tblPatients.setItems(tmList);
+        System.out.println();
 
 
     }
