@@ -1,5 +1,7 @@
 package com.bitlord.medex;
 
+import com.bitlord.medex.dto.UserDto;
+import com.bitlord.medex.util.Cookie;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -17,7 +19,24 @@ public class DoctorRegistrationFormController {
     public ToggleGroup gender;
     public JFXTextField txtSpecializations;
 
+
+    public void initialize() {
+        // load user data
+        loadUserData();
+    }
+
+    private void loadUserData() {
+
+        UserDto selectedUser = Cookie.selectedUser;
+
+        // set texts to text fields
+        txtFirstName.setText( selectedUser.getFirstName() );
+        txtLastName.setText( selectedUser.getLastName() );
+        txtEmail.setText( selectedUser.getEmail() );
+
+    }
+
     public void submitDataOnAtion(ActionEvent actionEvent) { // 50:58
-        
+
     }
 }
