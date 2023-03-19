@@ -1,10 +1,10 @@
 package com.bitlord.medex.util;
 
 import com.bitlord.medex.db.Database;
-import com.bitlord.medex.dto.User;
+import com.bitlord.medex.dto.UserDto;
 
 public class Cookie {
 
-    public static User selectedUser = Database.userTable.get( 1 );  // default value ---> null
+    public static UserDto selectedUser = Database.userTable.get( 1 );  // default value ---> null
 
 }

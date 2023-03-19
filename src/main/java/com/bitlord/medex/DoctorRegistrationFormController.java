@@ -2,7 +2,7 @@ package com.bitlord.medex;
 
 import com.bitlord.medex.db.Database;
 import com.bitlord.medex.dto.DoctorDto;
-import com.bitlord.medex.dto.User;
+import com.bitlord.medex.dto.UserDto;
 import com.bitlord.medex.enums.GenderType;
 import com.bitlord.medex.util.Cookie;
 import com.jfoenix.controls.JFXButton;
@@ -37,7 +37,7 @@ public class DoctorRegistrationFormController {
 
     private void loadUserData() {
 
-        User selectedUser = Cookie.selectedUser;
+        UserDto selectedUser = Cookie.selectedUser;
 
         // set texts to text fields
         txtFirstName.setText( selectedUser.getFirstName() );
