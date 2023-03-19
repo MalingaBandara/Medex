@@ -3,6 +3,7 @@ module com.bitlord.medex {
     requires javafx.fxml;
     //requires jfoenix;
     requires com.jfoenix;
+    requires java.sql;
 
 
     opens com.bitlord.medex to javafx.fxml;
