@@ -1,6 +1,6 @@
 package com.bitlord.medex;
 
-import com.bitlord.medex.db.Database;
+
 import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
 import com.jfoenix.controls.JFXRadioButton;
@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class SignupFormController {
     public JFXTextField txtPassword;
@@ -45,7 +44,7 @@ public class SignupFormController {
                     Connection connection = DriverManager.getConnection(
                             "jdbc:mysql://localhost:3306/medex",
                             "root",
-                            "symali1021"
+                            "spymali1021"
                     );
 
                 // 3 write a SQL
@@ -53,7 +52,7 @@ public class SignupFormController {
 
                 // 4 create statement
                     PreparedStatement pstm = connection.prepareStatement(sql);
-                    pstm.setInt(1,1001);
+                    pstm.setInt(1,1004);
                     pstm.setString(2, user.getFirstName());
                     pstm.setString(3, user.getLastName());
                     pstm.setString(4, user.getEmail());
