@@ -33,25 +33,6 @@ public class DoctorRegistrationFormController {
         // load user data
         loadUserData();
 
-
-        // ----------------- NIC Field Validate
-        txtNic.textProperty().addListener( ((observableValue, oldValue, newValue) -> {
-
-            // NIC conflict check
-            if ( Database.doctorTable.stream().filter( e->  e.getNic().equals( newValue )  ).findFirst().isPresent() ) {
-
-                new Alert( Alert.AlertType.WARNING, "NIC Conflict" ).show();
-
-                // disable submit button
-                btnSubmit.setDisable( true );
-                return;
-            }
-            btnSubmit.setDisable( false );
-
-        } ) );
-        // -----------------
-
-
     }
 
     private void loadUserData() {
@@ -66,6 +47,19 @@ public class DoctorRegistrationFormController {
     }
 
     public void submitDataOnAtion(ActionEvent actionEvent) {
+
+        // ----------------- NIC Field Validate
+        // NIC conflict check
+        if ( Database.doctorTable.stream().filter( e->  e.getNic().equals( txtNic.getText().trim() )  ).findFirst().isPresent() ) {
+
+            new Alert( Alert.AlertType.WARNING, "NIC Conflict" ).show();
+
+            // disable submit button
+            btnSubmit.setDisable( true );
+            return;
+        }
+        // -----------------
+
 
         // recode data
         DoctorDto doctorDto = new DoctorDto(
