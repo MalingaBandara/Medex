@@ -75,6 +75,8 @@ public class PatientManagementFormController {
             }
         }
         tblPatients.setItems(tmList);
+
+
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) {
