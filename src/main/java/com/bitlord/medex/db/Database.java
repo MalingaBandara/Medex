@@ -6,6 +6,7 @@ import com.bitlord.medex.dto.UserDto;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.enums.GenderType;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,26 +45,36 @@ public class Database {
                                 ) ) ;*/
 
             //---------------
+        try {
 
-                patientTable.add(
-                        new PatientDto( "95", "Eran", "Kaan",
-                                        new Date(), GenderType.MALE, "Galle", "eran@gmail.com" ) );
+            patientTable.add(
+                    new PatientDto("95", "Eran", "Kaan",
+                            new SimpleDateFormat("yyyy-MM-dd").parse("1991-04-01"),
+                            GenderType.MALE, "Galle", "eran@gmail.com"));
 
-                patientTable.add(
-                        new PatientDto( "912", "Samantha", "Bndara",
-                                        new Date(), GenderType.MALE, "Kaluthara", "sama@gmail.com" ) );
+            patientTable.add(
+                    new PatientDto("912", "Samantha", "Bndara",
+                            new SimpleDateFormat("yyyy-MM-dd").parse("1991-04-01"),
+                            GenderType.MALE, "Kaluthara", "sama@gmail.com"));
 
-                patientTable.add(
-                        new PatientDto( "66", "Namal", "Kaan",
-                                        new Date(), GenderType.MALE, "Wattala", "namma@gmail.com" ) );
+            patientTable.add(
+                    new PatientDto("66", "Namal", "Kaan",
+                            new SimpleDateFormat("yyyy-MM-dd").parse("1991-04-01"),
+                            GenderType.MALE, "Wattala", "namma@gmail.com"));
 
-                patientTable.add(
-                        new PatientDto( "456", "Wassa", "Kuna",
-                                        new Date(), GenderType.MALE, "Horna", "wasssa@gmail.com" ) );
+            patientTable.add(
+                    new PatientDto("456", "Wassa", "Kuna",
+                            new SimpleDateFormat("yyyy-MM-dd").parse("1991-04-01"),
+                            GenderType.MALE, "Horna", "wasssa@gmail.com"));
 
-                patientTable.add(
-                        new PatientDto( "695", "Gota", "Hora",
-                                        new Date(), GenderType.MALE, "Colombo", "gotaa@gmail.com" ) );
+            patientTable.add(
+                    new PatientDto("695", "Gota", "Hora",
+                            new SimpleDateFormat("yyyy-MM-dd").parse("1991-04-01"),
+                            GenderType.MALE, "Colombo", "gotaa@gmail.com"));
+
+        } catch ( Exception e ){
+            e.printStackTrace();
+        }
 
             //---------------
 
