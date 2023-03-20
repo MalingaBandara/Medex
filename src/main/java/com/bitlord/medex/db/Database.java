@@ -1,11 +1,13 @@
 package com.bitlord.medex.db;
 
 import com.bitlord.medex.dto.DoctorDto;
+import com.bitlord.medex.dto.PatientDto;
 import com.bitlord.medex.dto.UserDto;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.enums.GenderType;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Database {
 
@@ -16,8 +18,12 @@ public class Database {
     // ------- Second Table - Doctors
         public static ArrayList<DoctorDto> doctorTable = new ArrayList();
 
+    // ------- Third Table - Patient
+        public static ArrayList<PatientDto> patientTable = new ArrayList();
 
-        // Create Default users
+
+
+    // Create Default users
         static {
             //---------------
                 userTable.add( new UserDto( "Jhon", "Brw", "john@gmail.com","1234", AccountType.PATIENT) ); // Patient User
@@ -36,6 +42,28 @@ public class Database {
                                                 "Colombo",
                                                 GenderType.MALE
                                 ) ) ;*/
+
+            //---------------
+
+                patientTable.add(
+                        new PatientDto( "95", "Eran", "Kaan",
+                                        new Date(), GenderType.MALE, "Galle", "eran@gmail.com" ) );
+
+                patientTable.add(
+                        new PatientDto( "912", "Samantha", "Bndara",
+                                        new Date(), GenderType.MALE, "Kaluthara", "sama@gmail.com" ) );
+
+                patientTable.add(
+                        new PatientDto( "66", "Namal", "Kaan",
+                                        new Date(), GenderType.MALE, "Wattala", "namma@gmail.com" ) );
+
+                patientTable.add(
+                        new PatientDto( "456", "Wassa", "Kuna",
+                                        new Date(), GenderType.MALE, "Horna", "wasssa@gmail.com" ) );
+
+                patientTable.add(
+                        new PatientDto( "695", "Gota", "Hora",
+                                        new Date(), GenderType.MALE, "Colombo", "gotaa@gmail.com" ) );
 
             //---------------
 
