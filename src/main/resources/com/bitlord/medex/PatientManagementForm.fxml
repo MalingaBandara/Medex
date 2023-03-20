@@ -17,12 +17,13 @@
       <TableView layoutX="7.0" layoutY="139.0" prefHeight="328.0" prefWidth="862.0">
         <columns>
           <TableColumn prefWidth="136.0" text="NIC" />
-          <TableColumn prefWidth="113.0" text="First Name" />
-            <TableColumn prefWidth="129.0" text="Last Name" />
-            <TableColumn prefWidth="95.0" text="DOB" />
-            <TableColumn prefWidth="106.0" text="Gender" />
-            <TableColumn prefWidth="164.0" text="Address" />
-            <TableColumn prefWidth="118.0" text="Age" />
+          <TableColumn prefWidth="103.0" text="First Name" />
+            <TableColumn prefWidth="109.0" text="Last Name" />
+            <TableColumn prefWidth="100.0" text="DOB" />
+            <TableColumn prefWidth="63.0" text="Gender" />
+            <TableColumn prefWidth="161.0" text="Address" />
+            <TableColumn prefWidth="61.0" text="Age" />
+            <TableColumn prefWidth="141.0" text="Email" />
         </columns>
       </TableView>
    </children>
