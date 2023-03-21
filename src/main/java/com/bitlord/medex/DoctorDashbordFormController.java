@@ -6,6 +6,7 @@ import com.bitlord.medex.util.Cookie;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -102,4 +103,9 @@ public class DoctorDashbordFormController {
 
     }
 
+    public void navigateToPationManagementPage(ActionEvent actionEvent) throws IOException {
+
+        setUi( "PatientManagementForm" );
+
+    }
 }
