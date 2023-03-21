@@ -4,13 +4,15 @@ import com.bitlord.medex.db.Database;
 import com.bitlord.medex.dto.PatientDto;
 import com.bitlord.medex.tm.PatientTm;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+import java.text.SimpleDateFormat;
 
 public class PatientManagementFormController {
     public JFXTextField txtSerach;
@@ -29,10 +31,20 @@ public class PatientManagementFormController {
 
     public  void initialize () {
         loadAllData(""); // search text
+
+        //setdatabasevaluestotable
+        colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        colDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colGender.setCellValueFactory(new PropertyValueFactory<>("genderType"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
 
 
-    // search items
+
     private void loadAllData(String s) {
 
         s = s.toLowerCase(); // immutable
@@ -42,7 +54,16 @@ public class PatientManagementFormController {
 
             if (  dto.getFirstName().contains(s) || dto.getLastName().contains(s) || dto.getEmail().contains(s) ) {
 
-                tmList.add( new PatientTm( dto.getNic(), dto.getFirstName(), dto.getLastName(), dto.getDob(), dto.getGenderType(), dto.getAddress(), 10, dto.getEmail()) );
+                tmList.add( new PatientTm(
+                                            dto.getNic(),
+                                            dto.getFirstName(),
+                                            dto.getLastName(),
+                                            new SimpleDateFormat( "yyyy-MM-dd" ).format( dto.getDob() ),
+                                            dto.getGenderType(),
+                                            dto.getAddress(),
+                                            10, dto.getEmail()
+                        )
+                );
 
 
             }

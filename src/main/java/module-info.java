@@ -7,5 +7,8 @@ module com.bitlord.medex {
 
 
     opens com.bitlord.medex to javafx.fxml;
+
+    opens com.bitlord.medex.tm to javafx.base;
+
     exports com.bitlord.medex;
 }
