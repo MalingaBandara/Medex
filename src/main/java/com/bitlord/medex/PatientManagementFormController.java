@@ -30,7 +30,12 @@ public class PatientManagementFormController {
 
 
     public  void initialize () {
-        loadAllData(""); // search text
+        loadAllData(""); // search
+
+        // search text
+        txtSerach.textProperty().addListener( ( observable, oldValue, newValue ) -> {
+                loadAllData( newValue );
+        } );
 
         //setdatabasevaluestotable
         colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
