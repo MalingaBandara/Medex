@@ -19,6 +19,10 @@ public class PatientTm {
     public PatientTm() {
     }
 
+    public PatientTm(String nic, String firstName, String lastName, Date dob, GenderType genderType, String address, int i, String email) {
+
+    }
+
     public String getNic() {
         return nic;
     }
