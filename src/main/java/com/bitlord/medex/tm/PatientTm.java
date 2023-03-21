@@ -15,6 +15,9 @@ public class PatientTm {
     private int age;
     private String email;
 
+    // no args Constructor
+    public PatientTm() {
+    }
 
     public String getNic() {
         return nic;
