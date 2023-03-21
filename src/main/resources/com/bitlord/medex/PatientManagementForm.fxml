@@ -8,22 +8,22 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="473.0" prefWidth="875.0" stylesheets="@java.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bitlord.medex.PatientManagementFormController">
+<AnchorPane fx:id="patientContext" prefHeight="473.0" prefWidth="875.0" stylesheets="@java.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bitlord.medex.PatientManagementFormController">
    <children>
       <Label layoutX="87.0" layoutY="35.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Patient Management" textFill="#ff6600" />
       <Separator layoutX="35.0" layoutY="66.0" prefHeight="4.0" prefWidth="797.0" />
-      <JFXButton buttonType="RAISED" layoutX="28.0" layoutY="26.0" prefHeight="32.0" prefWidth="39.0" style="-fx-background-color: #012E6A; -fx-font-size: 15;" text="&lt;=" textFill="WHITE" />
-      <JFXTextField labelFloat="true" layoutX="36.0" layoutY="91.0" prefHeight="26.0" prefWidth="298.0" promptText="Search here" />
-      <TableView layoutX="7.0" layoutY="139.0" prefHeight="328.0" prefWidth="862.0">
+      <JFXButton buttonType="RAISED" layoutX="28.0" layoutY="26.0" onAction="#backToHomeOnAction" prefHeight="32.0" prefWidth="39.0" style="-fx-background-color: #012E6A; -fx-font-size: 15;" text="&lt;=" textFill="WHITE" />
+      <JFXTextField fx:id="txtSerach" labelFloat="true" layoutX="36.0" layoutY="91.0" prefHeight="26.0" prefWidth="298.0" promptText="Search here" />
+      <TableView fx:id="tblPatients" layoutX="7.0" layoutY="139.0" prefHeight="328.0" prefWidth="862.0">
         <columns>
-          <TableColumn prefWidth="136.0" text="NIC" />
-          <TableColumn prefWidth="103.0" text="First Name" />
-            <TableColumn prefWidth="109.0" text="Last Name" />
-            <TableColumn prefWidth="100.0" text="DOB" />
-            <TableColumn prefWidth="63.0" text="Gender" />
-            <TableColumn prefWidth="161.0" text="Address" />
-            <TableColumn prefWidth="61.0" text="Age" />
-            <TableColumn prefWidth="141.0" text="Email" />
+          <TableColumn fx:id="colNic" prefWidth="136.0" text="NIC" />
+          <TableColumn fx:id="colFirstName" prefWidth="103.0" text="First Name" />
+            <TableColumn fx:id="colLastName" prefWidth="109.0" text="Last Name" />
+            <TableColumn fx:id="colDob" prefWidth="100.0" text="DOB" />
+            <TableColumn fx:id="colGender" prefWidth="63.0" text="Gender" />
+            <TableColumn fx:id="colAddress" prefWidth="161.0" text="Address" />
+            <TableColumn fx:id="colAge" prefWidth="61.0" text="Age" />
+            <TableColumn fx:id="colEmail" prefWidth="141.0" text="Email" />
         </columns>
       </TableView>
    </children>
