@@ -1,7 +1,6 @@
 package com.bitlord.medex;
 
 
-import com.bitlord.medex.db.DBConnection;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.util.CrudUtil;
 import com.bitlord.medex.util.PasswordConfig;
@@ -16,7 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginFormController {
     public JFXTextField txtEmail;
@@ -37,7 +37,7 @@ public class LoginFormController {
 
             try {
 
-                ResultSet rst = CrudUtil.executeQuery(
+                ResultSet rst = CrudUtil.execute(
                         "SELECT * FROM user WHERE email=? AND account_type=?",
                         email, accountType.name()
                 );

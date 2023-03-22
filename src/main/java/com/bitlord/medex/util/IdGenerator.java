@@ -8,7 +8,7 @@ public class IdGenerator {
 
         try {
 
-            ResultSet rst = CrudUtil.executeQuery(
+            ResultSet rst = CrudUtil.execute(
                     "SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1"
             );
 

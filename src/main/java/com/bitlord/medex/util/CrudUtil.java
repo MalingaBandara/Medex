@@ -44,7 +44,7 @@ public class CrudUtil {
     }*/
 
     // Modern Way
-        private static <T> T execute ( String sql, Object...params ) throws SQLException, ClassNotFoundException {
+        public static <T> T execute ( String sql, Object...params ) throws SQLException, ClassNotFoundException {
 
                 PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
 

@@ -1,6 +1,5 @@
 package com.bitlord.medex;
 
-import com.bitlord.medex.db.DBConnection;
 import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.util.CrudUtil;
@@ -17,9 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
@@ -51,7 +47,7 @@ public class SignupFormController {
     //  *============================*
         try {
                 //  execute
-                    boolean isSaved = CrudUtil.executeUpdate(
+                    boolean isSaved = CrudUtil.execute(
                             "INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)",
                             new IdGenerator().generateId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),user.getAccountType().name()
                     );
