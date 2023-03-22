@@ -19,7 +19,7 @@ public class IdGenerator {
                 );
 
             // 3 write a SQL
-            String sql = "SELECT id FROM user ORDER BY user_id DESC LIMIT 1";
+            String sql = "SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1";
 
             PreparedStatement pstm = connection.prepareStatement(sql);
 
@@ -28,7 +28,7 @@ public class IdGenerator {
             ResultSet rst = pstm.executeQuery();
 
                 if ( rst.next() ) {
-                    return rst.getInt(1 ) + 1;
+                    return rst.getInt( 1 ) + 1;
                 }
 
 
