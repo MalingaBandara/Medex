@@ -1,5 +1,6 @@
 package com.bitlord.medex;
 
+import com.bitlord.medex.db.DBConnection;
 import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.util.IdGenerator;
@@ -48,21 +49,12 @@ public class SignupFormController {
 
     //  *============================*
         try {
-                    //  1 driver Load => dependency
-                    Class.forName( "com.mysql.cj.jdbc.Driver" );
-
-                    //  2 Create a Connection
-                    Connection connection = DriverManager.getConnection(
-                                                    "jdbc:mysql://localhost:3306/medex",
-                                                    "root",
-                                                    "spymali1021"
-                                );
-
                     // 3 write a SQL
                     String sql = "INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?) ";
 
                     // 4 create statement
-                    PreparedStatement pstm = connection.prepareStatement(sql);
+                    PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
+
                     pstm.setInt(1,new IdGenerator().generateId() );
                     pstm.setString(2, user.getFirstName() );
                     pstm.setString(3, user.getLastName());

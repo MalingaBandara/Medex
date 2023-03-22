@@ -1,6 +1,7 @@
 package com.bitlord.medex;
 
 
+import com.bitlord.medex.db.DBConnection;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
@@ -35,21 +36,12 @@ public class LoginFormController {
 
             try {
 
-                //  1 driver Load => dependency
-                Class.forName( "com.mysql.cj.jdbc.Driver" );
-
-                //  2 Create a Connection
-                Connection connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/medex",
-                        "root",
-                        "spymali1021"
-                );
-
                 // 3 write a SQL
-                String sql = " SELECT * FROM user WHERE CASE email =? AND account_type =? "; // query to get recode
+                String sql = "SELECT * FROM user WHERE email=? AND account_type=?"; // query to get recode
 
                 // 4 create statement
-                PreparedStatement pstm = connection.prepareStatement(sql);
+                PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
+
                 pstm.setString( 1, email );  // pass value to Query
                 pstm.setString( 2, accountType.name() );  // pass value to Query
                 ResultSet rst = pstm.executeQuery();
