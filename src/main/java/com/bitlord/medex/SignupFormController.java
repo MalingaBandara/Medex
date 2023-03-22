@@ -14,6 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class SignupFormController {
@@ -31,45 +35,57 @@ public class SignupFormController {
             // assign user input values
             String email = txtEmail.getText().trim().toLowerCase();
 
-               /* for ( UserDto dto : Database.userTable) {
+            User user = new User(txtFirstName.getText(),
+                    txtLastName.getText(),
+                    txtEmail.getText().trim().toLowerCase(),
+                    txtPassword.getText(),
+                    rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT);
 
-                    if ( dto.getEmail().equals( email.trim().toLowerCase() ) ) {
-
-                        new Alert( Alert.AlertType.WARNING,  "Email is Already exists!" ).show();
-                        return;
-                    }
-
-                }*/
-
-                // check user's email already exists  // (stream Like using for loop to search element)
-                Optional<User> SelectedUser = Database.userTable.stream() // stream like a බටයක්, so when passing data thrw බටයකින් we can filter things
-                        .filter( e -> e.getEmail().equals( email ) )
-                        .findFirst();
-
-             // Selected user email already exists in database what to do next
-                if (SelectedUser.isPresent() ) {
-                    new Alert( Alert.AlertType.WARNING,  "Email is Already exists!" ).show();
-                    return;
-                }
-
-
-                // account creation
-                Database.userTable.add(
-                        new User(
-                                txtFirstName.getText(),
-                                txtLastName.getText(),
-                                email, txtPassword.getText(),
-                                rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT
-                        )
-                );
-
-                        // show an alert to confirm  user registration
-                        new Alert( Alert.AlertType.CONFIRMATION, "Wellcome!" ).show();
 
                 // after user get registered redirect Login form
                 setUi();
 
+    //  *============================*
+        try {
+                    //  1 driver Load => dependency
+                    Class.forName( "com.mysql.cj.jdbc.Driver" );
 
+                    //  2 Create a Connection
+                    Connection connection = DriverManager.getConnection(
+                                                    "jdbc:mysql://localhost:3306/medex",
+                                                    "root",
+                                                    "spymali1021"
+                                );
+
+                    // 3 write a SQL
+                    String sql = "INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?) ";
+
+                    // 4 create statement
+                    PreparedStatement pstm = connection.prepareStatement(sql);
+                    pstm.setInt(1,1004);
+                    pstm.setString(2, user.getFirstName());
+                    pstm.setString(3, user.getLastName());
+                    pstm.setString(4, user.getEmail());
+                    pstm.setString(5, user.getPassword());
+                    pstm.setString(6, user.getAccountType().name());
+
+                    // 5 execute
+                    int isSaved = pstm.executeUpdate();
+
+                    if (isSaved>0){
+                        new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
+                    }else {
+                        new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+                    }
+
+                /*===============================*/
+
+
+        } catch (ClassNotFoundException | SQLException e ) {
+                        e.printStackTrace();
+                    }
+
+    //  *============================*
 
     }
 
