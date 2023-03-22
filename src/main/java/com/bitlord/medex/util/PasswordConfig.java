@@ -13,7 +13,7 @@ public class PasswordConfig {
 
 
         // Decrypt
-            public  boolean enctypt ( String rowPassword , String encryptedPassword  ) {
+            public  boolean decrypt ( String rowPassword , String encryptedPassword  ) {
 
                 return  BCrypt.checkpw ( rowPassword, encryptedPassword );
 

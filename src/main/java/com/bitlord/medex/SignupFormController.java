@@ -2,6 +2,8 @@ package com.bitlord.medex;
 
 import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
+import com.bitlord.medex.util.IdGenerator;
+import com.bitlord.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -37,7 +39,7 @@ public class SignupFormController {
             User user = new User(txtFirstName.getText(),
                     txtLastName.getText(),
                     txtEmail.getText().trim().toLowerCase(),
-                    txtPassword.getText(),
+                     new PasswordConfig().enctypt( txtPassword.getText() ) , //txtPassword.getText()
                     rBtnDoctor.isSelected() ? AccountType.DOCTOR : AccountType.PATIENT);
 
 
@@ -61,8 +63,8 @@ public class SignupFormController {
 
                     // 4 create statement
                     PreparedStatement pstm = connection.prepareStatement(sql);
-                    pstm.setInt(1,1006);
-                    pstm.setString(2, user.getFirstName());
+                    pstm.setInt(1,new IdGenerator().generateId() );
+                    pstm.setString(2, user.getFirstName() );
                     pstm.setString(3, user.getLastName());
                     pstm.setString(4, user.getEmail());
                     pstm.setString(5, user.getPassword());
