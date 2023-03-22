@@ -3,6 +3,7 @@ package com.bitlord.medex;
 import com.bitlord.medex.db.DBConnection;
 import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
+import com.bitlord.medex.util.CrudUtil;
 import com.bitlord.medex.util.IdGenerator;
 import com.bitlord.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
@@ -49,23 +50,13 @@ public class SignupFormController {
 
     //  *============================*
         try {
-                    // 3 write a SQL
-                    String sql = "INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?) ";
+                //  execute
+                    boolean isSaved = CrudUtil.executeUpdate(
+                            "INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)",
+                            new IdGenerator().generateId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),user.getAccountType().name()
+                    );
 
-                    // 4 create statement
-                    PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
-
-                    pstm.setInt(1,new IdGenerator().generateId() );
-                    pstm.setString(2, user.getFirstName() );
-                    pstm.setString(3, user.getLastName());
-                    pstm.setString(4, user.getEmail());
-                    pstm.setString(5, user.getPassword());
-                    pstm.setString(6, user.getAccountType().name());
-
-                    // 5 execute
-                    int isSaved = pstm.executeUpdate();
-
-                    if (isSaved>0){
+                    if (isSaved){
                         new Alert(Alert.AlertType.CONFIRMATION, "Saved!").show();
                     }else {
                         new Alert(Alert.AlertType.WARNING, "Try Again!").show();

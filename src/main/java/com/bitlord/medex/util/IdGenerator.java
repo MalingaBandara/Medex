@@ -8,24 +8,9 @@ public class IdGenerator {
 
         try {
 
-                //  1 driver Load => dependency
-                Class.forName( "com.mysql.cj.jdbc.Driver" );
-
-                //  2 Create a Connection
-                Connection connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/medex",
-                        "root",
-                        "spymali1021"
-                );
-
-            // 3 write a SQL
-            String sql = "SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1";
-
-            PreparedStatement pstm = connection.prepareStatement(sql);
-
-            // CRUD ==> Get(Read) => executeQuery() ===> Data set
-            // CRUD ==> save(create), delete , update  => executeUpdate()
-            ResultSet rst = pstm.executeQuery();
+            ResultSet rst = CrudUtil.executeQuery(
+                    "SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1"
+            );
 
                 if ( rst.next() ) {
                     return rst.getInt( 1 ) + 1;

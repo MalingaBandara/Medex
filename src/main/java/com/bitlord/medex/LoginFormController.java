@@ -3,6 +3,7 @@ package com.bitlord.medex;
 
 import com.bitlord.medex.db.DBConnection;
 import com.bitlord.medex.enums.AccountType;
+import com.bitlord.medex.util.CrudUtil;
 import com.bitlord.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -36,15 +37,10 @@ public class LoginFormController {
 
             try {
 
-                // 3 write a SQL
-                String sql = "SELECT * FROM user WHERE email=? AND account_type=?"; // query to get recode
-
-                // 4 create statement
-                PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
-
-                pstm.setString( 1, email );  // pass value to Query
-                pstm.setString( 2, accountType.name() );  // pass value to Query
-                ResultSet rst = pstm.executeQuery();
+                ResultSet rst = CrudUtil.executeQuery(
+                        "SELECT * FROM user WHERE email=? AND account_type=?",
+                        email, accountType.name()
+                );
 
                     if ( rst.next() ) {
                                             // check password correction
