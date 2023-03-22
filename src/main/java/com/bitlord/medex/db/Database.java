@@ -2,19 +2,18 @@ package com.bitlord.medex.db;
 
 import com.bitlord.medex.dto.DoctorDto;
 import com.bitlord.medex.dto.PatientDto;
-import com.bitlord.medex.dto.UserDto;
+import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.enums.GenderType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Database {
 
 
     // ------- First Table - Users
-        public static ArrayList<UserDto> userTable = new ArrayList();
+        public static ArrayList<User> userTable = new ArrayList();
 
     // ------- Second Table - Doctors
         public static ArrayList<DoctorDto> doctorTable = new ArrayList();
@@ -27,9 +26,9 @@ public class Database {
     // Create Default users
         static {
             //---------------
-                userTable.add( new UserDto( "Jhon", "Brw", "john@gmail.com","1234", AccountType.PATIENT) ); // Patient User
+                userTable.add( new User( "Jhon", "Brw", "john@gmail.com","1234", AccountType.PATIENT) ); // Patient User
 
-                userTable.add( new UserDto( "Malinga", "Bandara", "malinga@gmail.com","1234", AccountType.DOCTOR) ); // Doctor User
+                userTable.add( new User( "Malinga", "Bandara", "malinga@gmail.com","1234", AccountType.DOCTOR) ); // Doctor User
 
             //---------------
 

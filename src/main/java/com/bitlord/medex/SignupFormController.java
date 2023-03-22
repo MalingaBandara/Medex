@@ -1,7 +1,7 @@
 package com.bitlord.medex;
 
 import com.bitlord.medex.db.Database;
-import com.bitlord.medex.dto.UserDto;
+import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -42,7 +42,7 @@ public class SignupFormController {
                 }*/
 
                 // check user's email already exists  // (stream Like using for loop to search element)
-                Optional<UserDto> SelectedUser = Database.userTable.stream() // stream like a බටයක්, so when passing data thrw බටයකින් we can filter things
+                Optional<User> SelectedUser = Database.userTable.stream() // stream like a බටයක්, so when passing data thrw බටයකින් we can filter things
                         .filter( e -> e.getEmail().equals( email ) )
                         .findFirst();
 
@@ -55,7 +55,7 @@ public class SignupFormController {
 
                 // account creation
                 Database.userTable.add(
-                        new UserDto(
+                        new User(
                                 txtFirstName.getText(),
                                 txtLastName.getText(),
                                 email, txtPassword.getText(),
@@ -68,6 +68,8 @@ public class SignupFormController {
 
                 // after user get registered redirect Login form
                 setUi();
+
+
 
     }
 

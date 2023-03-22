@@ -1,7 +1,7 @@
 package com.bitlord.medex;
 
 import com.bitlord.medex.db.Database;
-import com.bitlord.medex.dto.UserDto;
+import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
 import com.bitlord.medex.util.Cookie;
 import com.jfoenix.controls.JFXRadioButton;
@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Locale;
 
 public class LoginFormController {
     public JFXTextField txtEmail;
@@ -36,7 +35,7 @@ public class LoginFormController {
 
 
             // find user in database
-             for ( UserDto dto :Database.userTable ) {
+             for ( User dto :Database.userTable ) {
 
                  if ( dto.getEmail().trim().toLowerCase().equals( email ) ) {                                // if email available
 
