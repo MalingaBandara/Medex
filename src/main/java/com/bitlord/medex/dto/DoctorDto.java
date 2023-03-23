@@ -30,6 +30,7 @@ public class DoctorDto {
         public DoctorDto() {
         }
 
+    // setters and getters - Enscap
 
     // setters and getters - Enscap
     public String getFirstName() {
