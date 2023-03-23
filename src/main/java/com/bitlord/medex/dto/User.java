@@ -31,6 +31,7 @@ public class User {
         }
 
 
+    // setters and getters - Enscap
     public String getFirstName() {
         return firstName;
     }
