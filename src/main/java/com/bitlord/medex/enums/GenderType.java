@@ -2,7 +2,7 @@ package com.bitlord.medex.enums;
 
 public enum GenderType {
 
-    MALE(1) , Fe_MALE(2);
+    MALE(1) , FE_MALE(2);
 
     final int state;
 

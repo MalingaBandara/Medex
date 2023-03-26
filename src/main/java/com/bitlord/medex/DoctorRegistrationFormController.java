@@ -56,7 +56,7 @@ public class DoctorRegistrationFormController {
     private String generateDoctorId() throws SQLException, ClassNotFoundException { // genrate doctor id
 
         // last element (id)
-        ResultSet result =  CrudUtil.execute( "SELECT doctor_id FROM doctor ODER BY doctor_id DESC LIMIT 1" );  // if the primary key is a string don't use this method
+        ResultSet result =  CrudUtil.execute( "SELECT doctor_id FROM doctor ORDER BY doctor_id DESC LIMIT 1" );  // if the primary key is a string don't use this method
 
         // unsigned, cast, subscribe
         if ( result.next() ) {
@@ -90,7 +90,7 @@ public class DoctorRegistrationFormController {
                                         txtEmail.getText(),
                                         txtSpecializations.getText(),
                                         txtAddress.getText(),
-                                        rBtnmale.isSelected()? GenderType.MALE : GenderType.Fe_MALE
+                                        rBtnmale.isSelected() ? GenderType.MALE.name() : GenderType.FE_MALE.name()
 
                         );
 
