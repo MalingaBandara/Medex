@@ -68,7 +68,7 @@ public class PatientRegistrationFormController {
     public void submitDataOnAtion(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
     }
-
+//
 
     // method for redirect forms
     private void setUI ( String location ) throws IOException {
