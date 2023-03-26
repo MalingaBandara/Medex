@@ -7,20 +7,27 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class NewAppointmentFormController {
     public JFXTextField txtDate;
     public AnchorPane newAppoinmentContext;
-    public JFXComboBox<String> cmbDoctor;
+
     public JFXTextField txtTime;
     public JFXTextField txtAmount;
     public JFXTextArea txtMessage;
+    public JFXComboBox<String> cmbDoctor;
 
-    public void initialie() {
+
+    public void initialize() {
         seDoctorIds();
     }
 
@@ -52,7 +59,16 @@ public class NewAppointmentFormController {
 
     }
 
-    public void backToHmeOnAction(ActionEvent actionEvent) {
+    public void backToHmeOnAction(ActionEvent actionEvent) throws IOException {
+        setUI( "PatientDashboardForm" );
+    }
+
+    // method for redirect forms
+    private void setUI ( String location ) throws IOException {
+
+        Stage stage = (Stage) newAppoinmentContext.getScene().getWindow();
+
+        stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/"+ location +".fxml"))));
 
     }
 }
