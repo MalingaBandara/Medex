@@ -1,7 +1,9 @@
 package com.bitlord.medex;
 
 
+import com.bitlord.medex.dto.User;
 import com.bitlord.medex.enums.AccountType;
+import com.bitlord.medex.util.Cookie;
 import com.bitlord.medex.util.CrudUtil;
 import com.bitlord.medex.util.PasswordConfig;
 import com.jfoenix.controls.JFXRadioButton;
@@ -46,12 +48,33 @@ public class LoginFormController {
                                             // check password correction
                         if ( new PasswordConfig().decrypt(password, rst.getString( "password" )) ) {
                                  // check account type to redirect particular dashboard
-                            if ( accountType.equals( AccountType.DOCTOR ) ) {
-                                setUI( "DoctorDashbordForm" );
-                                return;
+                                if ( accountType.equals( AccountType.PATIENT ) ) {
+
+                                    ResultSet selectedDoctorResult = CrudUtil.execute("SELECT patient_id FROM patient WHERE email=?", email);
+
+                                            if ( selectedDoctorResult.next() ) {
+                                                                                    // assign a user to our cookie to get some data to display
+                                                Cookie.selectedUser = new User(
+                                                                rst.getString( "first_name" ),
+                                                                rst.getString( "last_name" ),
+                                                                rst.getString( "email" ),
+                                                                "", // we didn't pass password to the cookie
+                                                                AccountType.PATIENT
+                                                    );
+
+                                                // load dashboard
+                                                setUI( "PatientDashboardForm" );
+
+                                            }
+                                            else {
+                                                // load registration
+                                            }
+
+
+
                             }else {
-                                setUI( "PatientDashboardForm" );
-                                return;
+                                    //setUI( "DoctorDashbordForm" );
+
                             }
 
                         }

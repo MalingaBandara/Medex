@@ -10,7 +10,8 @@ public class CrudUtil {
     //  ways =>   , modern
 
     // Legacy Way
-        /*    private static PreparedStatement execute ( String sql, Object...params ) throws SQLException, ClassNotFoundException {
+    /*
+    private static PreparedStatement execute ( String sql, Object...params ) throws SQLException, ClassNotFoundException {
 
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
 
@@ -41,7 +42,7 @@ public class CrudUtil {
 
         return execute( sql, params ).executeQuery();
 
-    }*/
+    } */
 
     // Modern Way
         public static <T> T execute ( String sql, Object...params ) throws SQLException, ClassNotFoundException {
