@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class NewAppointmentFormController {
     public JFXTextField txtDate;
@@ -68,6 +69,20 @@ public class NewAppointmentFormController {
 
 
     public void seeAvailabilityOnAction(ActionEvent actionEvent) {
+
+        Optional<DoctorComboView> selectedRecode = viewList.stream().filter(
+                e -> e.getIndex() == Integer.parseInt(cmbDoctor.getValue()
+                        .split("\\.")[0])).findFirst();
+
+        if ( selectedRecode.isPresent() ) {
+            // print
+            System.out.println( selectedRecode.get().getDocId() );
+            System.out.println( txtDate.getText() );
+            System.out.println( txtTime.getText() );
+        }else {
+            System.out.println("Empty");
+        }
+
     }
 
     public void submitDataOnAction(ActionEvent actionEvent) {
