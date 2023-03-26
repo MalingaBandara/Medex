@@ -45,6 +45,16 @@ public class LoginFormController {
                 );
 
                     if ( rst.next() ) {
+
+                        // assign a user to our cookie to get some data to display
+                        Cookie.selectedUser = new User(
+                                rst.getString( "first_name" ),
+                                rst.getString( "last_name" ),
+                                rst.getString( "email" ),
+                                "", // we didn't pass password to the cookie
+                                accountType
+                        );
+
                                             // check password correction
                         if ( new PasswordConfig().decrypt(password, rst.getString( "password" )) ) {
                                  // check account type to redirect particular dashboard
@@ -53,48 +63,25 @@ public class LoginFormController {
                                     ResultSet selectedPatientResult = CrudUtil.execute("SELECT patient_id FROM patient WHERE email=?", email);
 
                                             if ( selectedPatientResult.next() ) {
-                                                                                    // assign a user to our cookie to get some data to display
-                                                Cookie.selectedUser = new User(
-                                                                rst.getString( "first_name" ),
-                                                                rst.getString( "last_name" ),
-                                                                rst.getString( "email" ),
-                                                                "", // we didn't pass password to the cookie
-                                                                AccountType.PATIENT
-                                                    );
-
                                                 // load dashboard
                                                 setUI( "PatientDashboardForm" );
-
                                             }
                                             else {
                                                 // load registration
                                                 setUI( "PatientRegistrationForm" );
                                             }
 
-
-
                             }else {
                                     ResultSet selectedDoctorResult = CrudUtil.execute("SELECT doctor_id FROM doctor WHERE email=?", email);
 
-                                    if ( selectedDoctorResult.next() ) {
-                                            // assign a user to our cookie to get some data to display
-                                            Cookie.selectedUser = new User(
-                                                    rst.getString( "first_name" ),
-                                                    rst.getString( "last_name" ),
-                                                    rst.getString( "email" ),
-                                                    "", // we didn't pass password to the cookie
-                                                    AccountType.DOCTOR
-                                            );
-
-                                            // load dashboard
-                                            setUI( "DoctorDashboardForm" );
-
-                                    }
-                                    else {
-                                        // load registration
-                                        setUI( "DoctorRegistrationForm" );
-                                    }
-
+                                            if ( selectedDoctorResult.next() ) {
+                                                // load dashboard
+                                                setUI( "DoctorDashboardForm" );
+                                            }
+                                            else {
+                                                // load registration
+                                                setUI( "DoctorRegistrationForm" );
+                                            }
 
 
                             }
