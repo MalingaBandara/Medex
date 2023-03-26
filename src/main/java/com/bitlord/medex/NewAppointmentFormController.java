@@ -1,5 +1,6 @@
 package com.bitlord.medex;
 
+import com.bitlord.medex.tm.DoctorComboView;
 import com.bitlord.medex.util.CrudUtil;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class NewAppointmentFormController {
     public JFXTextField txtDate;
@@ -26,6 +28,8 @@ public class NewAppointmentFormController {
     public JFXTextArea txtMessage;
     public JFXComboBox<String> cmbDoctor;
 
+    private ArrayList <DoctorComboView> viewList = new ArrayList<>();
+
 
     public void initialize() {
         seDoctorIds();
@@ -35,12 +39,23 @@ public class NewAppointmentFormController {
 
         try {
 
-                ResultSet set = CrudUtil.execute("SELECT doctor_id,first_name,last_name FROM doctor"); // get doctors data
+            ResultSet set = CrudUtil.execute("SELECT doctor_id,first_name,last_name FROM doctor"); // get doctors data
 
-                    ObservableList<String> obList = FXCollections.observableArrayList(); // list to add recodes
+                ObservableList<String> obList = FXCollections.observableArrayList(); // list to add recodes
+
+                        int index = 1; // to genarate doctor id
 
                         while (set.next() ) {
-                                obList.add(set.getString( 1) );
+
+                                    DoctorComboView viewData = new DoctorComboView(index, set.getString(1),
+                                                                set.getString(2) + " " + set.getString(3));
+
+                                viewList.add( viewData );
+
+                            obList.add( index + "." + viewData.getName() );
+
+                        index ++;
+
                         }
 
                 cmbDoctor.setItems( obList );
