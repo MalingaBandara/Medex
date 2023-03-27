@@ -112,7 +112,7 @@ public class NewAppointmentFormController {
                     txtTime.getText(),
                     Double.parseDouble( txtAmount.getText() ),
                     false,
-                    "P-1",
+                    selectedPatientId,
                     selectedDoctorId
 
             );
