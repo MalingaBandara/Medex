@@ -1,7 +1,9 @@
 package com.bitlord.medex;
 
 import com.bitlord.medex.tm.DoctorComboView;
+import com.bitlord.medex.util.Cookie;
 import com.bitlord.medex.util.CrudUtil;
+import com.bitlord.medex.util.IdGenerator;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -10,7 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,12 +31,41 @@ public class NewAppointmentFormController {
     public JFXTextArea txtMessage;
     public JFXComboBox<String> cmbDoctor;
 
+    String selectedDoctorId = ""; // get doctor id
+    String selectedPatientId = ""; // get patient id
+
     private ArrayList <DoctorComboView> viewList = new ArrayList<>();
 
 
     public void initialize() {
-        seDoctorIds();
+
+        seDoctorIds(); // load doctor name and ids in combo box
+        setPatientData(); // get current patient who log in to this system now
     }
+
+    private void setPatientData() {  // get current patient who log in to this system now
+
+            try {
+
+                ResultSet set = CrudUtil.execute( "SELECT patient_id FROM patient WHERE email=?", Cookie.selectedUser.getEmail() ); // get patient_id using email
+
+                        if ( set.next() ) {
+
+                                selectedPatientId = set.getString(1); // set patient id to global variable
+
+                        } else { // not patient
+                            // => redirect patient registration
+                            setUI( "PatientRegistrationForm" );
+
+                        }
+
+
+            } catch (SQLException | ClassNotFoundException | IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
 
     private void seDoctorIds() {
 
@@ -68,6 +99,36 @@ public class NewAppointmentFormController {
     }
 
 
+    public void submitDataOnAction(ActionEvent actionEvent) {
+
+        String id = new IdGenerator().generateId("SELECT appointment_id FROM appointment ORDER BY appointment_id DESC LIMIT 1", "A");
+
+
+        try {
+
+            boolean isSaved = CrudUtil.execute( "INSERT INTO appointment VALUES(?,?,?,?,?,?,?)",
+                    id,
+                    txtDate.getText(),
+                    txtTime.getText(),
+                    Double.parseDouble( txtAmount.getText() ),
+                    false,
+                    "P-1",
+                    selectedDoctorId
+
+            );
+
+            if ( isSaved ) {
+                new Alert( Alert.AlertType.INFORMATION, "Completed" ).show();
+                setUI("PatientDashboardForm");
+            }
+
+        } catch (SQLException | ClassNotFoundException | IOException e ) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     public void seeAvailabilityOnAction(ActionEvent actionEvent) {
 
         Optional<DoctorComboView> selectedRecode = viewList.stream().filter(
@@ -76,18 +137,14 @@ public class NewAppointmentFormController {
 
         if ( selectedRecode.isPresent() ) {
             // print
-            System.out.println( selectedRecode.get().getDocId() );
-            System.out.println( txtDate.getText() );
-            System.out.println( txtTime.getText() );
+            selectedDoctorId = selectedRecode.get().getDocId(); // assign doctor id to global variable
+
         }else {
             System.out.println("Empty");
         }
 
     }
 
-    public void submitDataOnAction(ActionEvent actionEvent) {
-
-    }
 
     public void backToHmeOnAction(ActionEvent actionEvent) throws IOException {
         setUI( "PatientDashboardForm" );
