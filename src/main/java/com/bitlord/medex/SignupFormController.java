@@ -46,7 +46,7 @@ public class SignupFormController {
 
     //  *============================*
         try {
-            String id = new IdGenerator().generateId( "SELECT suer_id FROM user ORDER BY user_id DESC 1", "U" );
+            String id = new IdGenerator().generateId( "SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1", "U" );
                 //  execute
                     boolean isSaved = CrudUtil.execute(
                             "INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)",

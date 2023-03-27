@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 public class NewAppointmentFormController {
     public JFXTextField txtDate;
@@ -138,6 +139,7 @@ public class NewAppointmentFormController {
         if ( selectedRecode.isPresent() ) {
             // print
             selectedDoctorId = selectedRecode.get().getDocId(); // assign doctor id to global variable
+            txtAmount.setText( String.valueOf( new Random().nextInt(1000) ) ); // generate random amount
 
         }else {
             System.out.println("Empty");
