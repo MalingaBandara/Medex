@@ -1,7 +1,5 @@
 package com.bitlord.medex;
 
-import com.bitlord.medex.db.Database;
-import com.bitlord.medex.dto.PatientDto;
 import com.bitlord.medex.enums.GenderType;
 import com.bitlord.medex.tm.PatientTm;
 import com.bitlord.medex.util.CrudUtil;
@@ -9,15 +7,19 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 
 public class PatientManagementFormController {
     public JFXTextField txtSerach;
@@ -42,7 +44,7 @@ public class PatientManagementFormController {
                 loadAllData( newValue );
         } );
 
-        //setdatabasevaluestotable
+        //set database values to table
         colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -52,8 +54,6 @@ public class PatientManagementFormController {
         colAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
-
-
 
     private void loadAllData(String s) {
 
@@ -89,6 +89,18 @@ public class PatientManagementFormController {
 
     }
 
-    public void backToHomeOnAction(ActionEvent actionEvent) {
+    public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
+
+        setUI( "DoctorDashbordForm" );
+
     }
+
+    private void setUI ( String location ) throws IOException {
+
+        Stage stage = (Stage) patientContext.getScene().getWindow();
+
+        stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/"+ location +".fxml"))));
+
+    }
+
 }

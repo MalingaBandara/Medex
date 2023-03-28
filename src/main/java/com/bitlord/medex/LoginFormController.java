@@ -76,7 +76,7 @@ public class LoginFormController {
 
                                             if ( selectedDoctorResult.next() ) {
                                                 // load dashboard
-                                                setUI( "DoctorDashboardForm" );
+                                                setUI( "DoctorDashbordForm" );
                                             }
                                             else {
                                                 // load registration
