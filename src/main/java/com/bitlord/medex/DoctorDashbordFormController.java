@@ -108,4 +108,20 @@ public class DoctorDashbordFormController {
         setUi( "PatientManagementForm" );
 
     }
+
+    public void navigateToAppointmentPage(ActionEvent actionEvent) throws IOException {
+
+        setUi( "AppointmentForm" );
+
+    }
+
+    // method for redirect forms
+    private void setUI ( String location ) throws IOException {
+
+        Stage stage = (Stage) doctorDashboardContext.getScene().getWindow();
+
+        stage.setScene( new Scene( FXMLLoader.load( getClass().getResource("/com/bitlord/medex/"+ location +".fxml"))));
+
+    }
+
 }
