@@ -2,7 +2,9 @@ package com.bitlord.medex;
 
 import com.bitlord.medex.db.Database;
 import com.bitlord.medex.dto.PatientDto;
+import com.bitlord.medex.enums.GenderType;
 import com.bitlord.medex.tm.PatientTm;
+import com.bitlord.medex.util.CrudUtil;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +14,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class PatientManagementFormController {
     public JFXTextField txtSerach;
@@ -52,30 +57,35 @@ public class PatientManagementFormController {
 
     private void loadAllData(String s) {
 
-        s = s.toLowerCase(); // immutable
-        ObservableList <PatientTm> tmList = FXCollections.observableArrayList();
+        ObservableList <PatientTm> tmList = FXCollections.observableArrayList(); // object of PatientTm
 
-        for (PatientDto dto: Database.patientTable ) {
+        String searchText = "%" + s + "%";
 
-            if (  dto.getFirstName().contains(s) || dto.getLastName().contains(s) || dto.getEmail().contains(s) ) {
+        try {
 
-                tmList.add( new PatientTm(
-                                            dto.getNic(),
-                                            dto.getFirstName(),
-                                            dto.getLastName(),
-                                            new SimpleDateFormat( "yyyy-MM-dd" ).format( dto.getDob() ),
-                                            dto.getGenderType(),
-                                            dto.getAddress(),
-                                            10, dto.getEmail()
-                        )
-                );
+            ResultSet set = CrudUtil.execute("SELECT * FROM patient WHERE email LIKE ? OR first_name LIKE ? OR last_name LIKE ?   ",
+                    searchText, searchText, searchText); // search query
 
+                while ( set.next() ) {
 
-            }
+                    tmList.add ( new PatientTm(
+                                                set.getString( 6 ), // Nic
+                                                set.getString( 2 ), // first name
+                                                set.getString(3 ),  // last name
+                                                new SimpleDateFormat( "yyyy-MM-dd" ).format( set.getDate( 8 ) ), // dob
+                                                set.getString( 9 ) == "MALE" ? GenderType.MALE : GenderType.FE_MALE, // gender
+                                                set.getString( 7 ),    // address
+                                                0,                 // age
+                                                set.getString( 4 )     // email
+                    ));
 
+                }
+
+            tblPatients.setItems( tmList );
+
+        } catch ( SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-
-        tblPatients.setItems( tmList );
 
     }
 
