@@ -1,15 +1,13 @@
 package com.bitlord.medex;
 
+import com.bitlord.medex.tm.AllAppointmentTm;
 import com.bitlord.medex.util.Cookie;
 import com.bitlord.medex.util.CrudUtil;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -75,6 +73,37 @@ public class AppointmentFormController {
         // all, completed, pending
 
         String sql = "SELECT a.*, p.first_name, p.last_name FROM appointment a JOIN patient p ON a.doctor_id=? AND p.patient_id = a.patient_id";
+
+        // filter by status
+        if ( rBtnPending.isSelected() ) { // pending status
+            sql = "SELECT a.*, p.first_name, p.last_name FROM appointment a JOIN patient p ON a.doctor_id=? AND a.check_state=0 AND p.patient_id = a.patient_id";
+        } else if ( rBtnCompleted.isSelected() ) { // completed status
+            sql = "SELECT a.*, p.first_name, p.last_name FROM appointment a JOIN patient p ON a.doctor_id=? AND a.check_state=1 AND p.patient_id = a.patient_id";
+        }
+
+        try {
+
+            ResultSet set = CrudUtil.execute(sql, selectedDoctorId);
+
+            while (set.next() ) {
+
+                Button btn = new Button( "manage" ); // create a button to manage recode
+
+                AllAppointmentTm tm = new AllAppointmentTm(
+                        set.getString( 1 ),
+                        set.getString( "first_name" ) + " " + set.getString("last_name" ),
+                        set.getString( "date" ),
+                        set.getString( "time" ),
+                        set.getDouble( "amount" ),
+                        set.getInt( "check_state" ) == 0 ? "Pending" : "Completed",
+                        btn
+                );
+
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
