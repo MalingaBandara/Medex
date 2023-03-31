@@ -4,10 +4,13 @@ import com.bitlord.medex.tm.AllAppointmentTm;
 import com.bitlord.medex.util.Cookie;
 import com.bitlord.medex.util.CrudUtil;
 import com.jfoenix.controls.JFXRadioButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -23,7 +26,7 @@ public class AppointmentFormController {
     public JFXRadioButton rBtnPending;
     public ToggleGroup type;
     public JFXRadioButton rBtnCompleted;
-    public TableView tblAppointment;
+    public TableView<AllAppointmentTm> tblAppointment;
     public TableColumn colId;
     public TableColumn colPatient;
     public TableColumn colDate;
@@ -32,12 +35,22 @@ public class AppointmentFormController {
     public TableColumn colCheckState;
     public TableColumn colManage;
 
-    String selectedDoctorId = "";
+    String selectedDoctorId = ""; // set current doctor
 
 
     public void initialize() {
         loadDoctorData();
         loadAppointments();
+
+        // set values in to Columns
+        colId.setCellValueFactory( new PropertyValueFactory<>( "id" ));
+        colAmount.setCellValueFactory( new PropertyValueFactory<>( "amount" ));
+        colManage.setCellValueFactory( new PropertyValueFactory<>( "btn" ));
+        colCheckState.setCellValueFactory( new PropertyValueFactory<>( "checkState" ));
+        colDate.setCellValueFactory( new PropertyValueFactory<>( "date" ));
+        colPatient.setCellValueFactory( new PropertyValueFactory<>( "patient" ));
+        colTime.setCellValueFactory( new PropertyValueFactory<>( "time" ));
+
     }
 
 
@@ -69,6 +82,8 @@ public class AppointmentFormController {
     // load particular appointments data
     private void loadAppointments() {
 
+        ObservableList<AllAppointmentTm> tmList = FXCollections.observableArrayList(  );
+
         // check from date & to date Select ?
         // all, completed, pending
 
@@ -99,7 +114,11 @@ public class AppointmentFormController {
                         btn
                 );
 
+                tmList.add( tm ); // add data to Observable List which include All Appointment Tm values
+
             }
+
+            tblAppointment.setItems( tmList ); // pass ObservableList data into table
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
