@@ -4,6 +4,8 @@ import com.bitlord.medex.tm.AllAppointmentTm;
 import com.bitlord.medex.util.Cookie;
 import com.bitlord.medex.util.CrudUtil;
 import com.jfoenix.controls.JFXRadioButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +36,7 @@ public class AppointmentFormController {
     public TableColumn colAmount;
     public TableColumn colCheckState;
     public TableColumn colManage;
+    public JFXRadioButton rBtnAll;
 
     String selectedDoctorId = ""; // set current doctor
 
@@ -50,6 +53,38 @@ public class AppointmentFormController {
         colDate.setCellValueFactory( new PropertyValueFactory<>( "date" ));
         colPatient.setCellValueFactory( new PropertyValueFactory<>( "patient" ));
         colTime.setCellValueFactory( new PropertyValueFactory<>( "time" ));
+
+
+        // check radio button and filter according to it
+        // Pending filter
+        rBtnPending.selectedProperty().addListener( new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    loadAppointments();
+                }
+            }
+        });
+
+        // Completed filter
+        rBtnCompleted.selectedProperty().addListener( new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    loadAppointments();
+                }
+            }
+        });
+
+        // All filter
+        rBtnAll.selectedProperty().addListener( new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    loadAppointments();
+                }
+            }
+        });
 
     }
 
