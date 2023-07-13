@@ -67,13 +67,10 @@ public class AppointmentFormController {
         });
 
         // Completed filter
-        rBtnCompleted.selectedProperty().addListener( new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+        rBtnCompleted.selectedProperty().addListener( ( observable, oldValue, newValue) -> {  // lambda type
                 if (newValue) {
                     loadAppointments();
                 }
-            }
         });
 
         // All filter
@@ -85,7 +82,6 @@ public class AppointmentFormController {
                 }
             }
         });
-
     }
 
 
