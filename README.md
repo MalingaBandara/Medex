@@ -1,22 +1,56 @@
-# Medex
-JavaFX - Hospital Management System
 
-- [User Login](README.md#01-login)
-- [User Signup](README.md#02-signup)
-- [Doctor Signup](README.md#03-doctor-signup)
-- [Paitent Signup](README.md#04-paitent-signup) 
-- [Doctor Login](README.md#05-doctor-login) 
-- [Paitent Login](README.md#06-paitent-login) 
-- [Doctor Registration](README.md#07-doctor-registration)
-- [Paitent Registration](README.md#08-paitent-registration) 
-- [Doctor Dashboard](README.md#09-doctor-dashboard) 
-- [Paitent Dashboard](README.md#10-paitent-dashboard) 
-- [Paitent Management](README.md#11-patient-management) 
-- [Check Appointments](README.md#12-check-appointments)
-- [Add Appointments](README.md#13-add-appointments)
+# Medex Hospital Management System
 
+## Project Overview
 
-<b>Screenshots</b>
+Medex is a comprehensive hospital management system developed using JavaFX. The system facilitates patient management, appointment scheduling, and doctor registration, aiming to streamline the operations within a hospital setting. This application features role-based access, allowing both doctors and patients to interact with the system according to their roles. The project showcases my skills in JavaFX, UI/UX design, and backend development.
+
+## Key Features
+
+- **Doctor and Patient Management**: Register, update, and manage doctor and patient information.
+- **Appointment Scheduling**: Patients can schedule appointments with available doctors.
+- **Role-Based Access Control**: Different views and functionalities based on user roles (Doctor/Patient).
+- **Responsive UI**: Intuitive and user-friendly interface designed with JavaFX.
+
+## Technologies Used
+
+- **Java**
+- **JavaFX**
+- **SQLite Database**
+
+## Project Structure and Code Explanation
+
+1. **Doctor and Patient Registration**:
+   - Allows users to register as either a doctor or a patient, storing the relevant information in the database.
+   - Provides a clean and straightforward interface for data entry.
+   ```java
+   public class RegistrationController {
+       // Handles the registration logic
+   }
+   ```
+
+2. **Appointment Scheduling**:
+   - Patients can schedule appointments, which are then managed and viewed by the doctors.
+   - The system checks for availability and prevents double-booking.
+   ```java
+   public class AppointmentController {
+       // Handles the appointment scheduling logic
+   }
+   ```
+
+3. **Role-Based Access Control**:
+   - Upon login, users are directed to their respective dashboards based on their roles.
+   - Doctors have access to patient management and appointment viewing, while patients can manage their appointments.
+   ```java
+   public class LoginController {
+       // Handles role-based redirection post-login
+   }
+   ```
+
+## Project Output
+
+Here are some screenshots showing the key features and output of the application:
+
 
 <h4>01) Login</h4>
 <img src="https://github.com/MalingaBandara/Medex/blob/master/screenshots/L.png" width="50%" >
@@ -63,3 +97,21 @@ JavaFX - Hospital Management System
 <img src="https://github.com/MalingaBandara/Medex/blob/master/screenshots/pA2.png" width="50%" >
 <img src="https://github.com/MalingaBandara/Medex/blob/master/screenshots/pA3.png" width="50%" >
 
+
+## How to Run the Project
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/MalingaBandara/Medex.git
+   ```
+2. Open the project in your preferred Java IDE (e.g., IntelliJ IDEA, Eclipse).
+3. Build and run the project.
+4. Ensure the SQLite database file is correctly linked in the project settings.
+
+## Purpose and Future Enhancements
+
+The Medex project was developed to demonstrate my capabilities in JavaFX and building a comprehensive hospital management system. Future enhancements may include integrating online payments for appointments, implementing more advanced security features, and expanding the system to manage inventory and billing.
+
+## License
+
+This project is licensed under the MIT License.
